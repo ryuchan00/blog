@@ -30,7 +30,7 @@ Webサーバーは、vagrantを使用しています。
 ```bash
 $ sudo ntpdate ntp.nict.jp
  6 Aug 14:02:10 ntpdate[7681]: adjust time server 133.243.238.244 offset 0.003161 sec
- ```
+```
 
  ## ntpdateとは
 
