@@ -37,6 +37,7 @@ machine:
 test:
   override:
     - echo "start"
+    - ruby test.rb
   # post:
   #   - bundle exec rake jasmine:ci: # add an extra test type
   #       environment:
