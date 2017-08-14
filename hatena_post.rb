@@ -30,14 +30,8 @@ File.open(ARGV[0]) do |file|
   # 読み込み用にオープンされていない場合にIOErrorが発生
   # データの読み込みに失敗した場合にErrno::EXXXが発生
   if title.empty? && category.empty?
-        file.each_line do |labmen|
-           title = labmen
-           break
-        end
-        file.each_line do |labmen|
-           category = labmen.split(",")
-           break
-        end
+    title = file.gets
+    category = file.gets.split(",")
   end
   body = file.read
 end
