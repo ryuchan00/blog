@@ -5,6 +5,7 @@ require 'dotenv'
 Dotenv.load ".env"
 require 'hatenablog'
 
+# config.ymlの作成
 file = File.open("./config.yml", "w")
 file.write "consumer_key: " + ENV['CONSUMER_KEY'] + "\n"
 file.write "consumer_secret: " + ENV['CONSUMER_SECRET'] + "\n"
@@ -14,7 +15,9 @@ file.write "user_id: " + ENV['USER_ID'] + "\n"
 file.write "blog_id: " + ENV['BLOG_ID'] + "\n"
 file.close
 
-files = ""
+title = ""
+body = ""
+category = []
 
 File.open(ARGV[0]) do |file|
   # まずIO#readでファイル全体を文字列として読み込む
@@ -26,30 +29,30 @@ File.open(ARGV[0]) do |file|
   # 第2引数: 出力用のバッファ(デフォルト => '')
   # 読み込み用にオープンされていない場合にIOErrorが発生
   # データの読み込みに失敗した場合にErrno::EXXXが発生
-  # file.read.split("\n").each do |labmen|
-    # puts labmen
-  # end
-  files = file.read
+  if title.empty? && category.empty?
+        file.each_line do |labmen|
+           title = labmen
+           break
+        end
+        file.each_line do |labmen|
+           category = labmen.split(",")
+           break
+        end
+  end
+  body = file.read
 end
-
-# files.gsub!(/(\n)/, '  ')
-
-# p files
-
-# exit
 
 # デフォルトでは 'conf.yml' から OAuth 設定を読み込む
 Hatenablog::Client.create do |blog|
   # 最新 7 件のエントリの内容を出力する
-  blog.entries.each do |entry|
+  # blog.entries.each do |entry|
     # puts entry.content
-  end
+  # end
 
   # 新しいエントリを投稿する
-  posted_entry = blog.post_entry('Test Entry Title',
-                                #  '# This is entry contents\n test', # Markdown 形式
-                                files,
-                                 ['Test', 'Programming'])  # カテゴリ
+  posted_entry = blog.post_entry(title,
+                                body,
+                                category)
 
   # 既存エントリを更新する
   # updated_entry = blog.update_entry(posted_entry.id,

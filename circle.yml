@@ -36,7 +36,6 @@ machine:
 ## Customize test commands
 test:
   override:
-    - echo "start"
     - gem install hatenablog
     - gem install dotenv-rails
     - git diff HEAD^ --name-only | grep .md | xargs -I{} ruby hatena_post.rb {}
