@@ -38,7 +38,7 @@ test:
   override:
     - gem install hatenablog
     - gem install dotenv-rails
-    - git diff HEAD^ --name-only | grep .md | xargs -I{} ruby hatena_post.rb {}
+    - git diff HEAD^ --name-only | grep article/.*\.md | xargs -I{} ruby hatena_post.rb {}
   # post:
   #   - bundle exec rake jasmine:ci: # add an extra test type
   #       environment:

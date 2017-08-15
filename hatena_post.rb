@@ -32,9 +32,13 @@ File.open(ARGV[0]) do |file|
   if title.empty? && category.empty?
     title = file.gets
     category = file.gets.split(",")
+    category.map! {|item| item.strip}
   end
   body = file.read
 end
+
+p category
+exit
 
 # デフォルトでは 'conf.yml' から OAuth 設定を読み込む
 Hatenablog::Client.create do |blog|
