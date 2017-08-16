@@ -15,20 +15,18 @@ file.write "user_id: " + ENV['USER_ID'] + "\n"
 file.write "blog_id: " + ENV['BLOG_ID'] + "\n"
 file.close
 
+inputFile = ARGV[0].to_s
 title = ""
 body = ""
 category = []
 
-File.open(ARGV[0]) do |file|
-  # まずIO#readでファイル全体を文字列として読み込む
-  # 次にString#splitで改行文字ごとに配列に変換
-  # 最後にArray#eachで要素ごとにブロックを評価
-  #
-  # IO#read
-  # 第1引数: 読み込むサイズ(デフォルト => nil)
-  # 第2引数: 出力用のバッファ(デフォルト => '')
-  # 読み込み用にオープンされていない場合にIOErrorが発生
-  # データの読み込みに失敗した場合にErrno::EXXXが発生
+# ファイルの存在確認をする
+unless File.exist?(inputFile)
+    puts inputFile + "は存在しません"
+    exit
+end
+
+File.open(inputFile) do |file|
   if title.empty? && category.empty?
     title = file.gets
     category = file.gets.split(",")
@@ -42,22 +40,7 @@ exit
 
 # デフォルトでは 'conf.yml' から OAuth 設定を読み込む
 Hatenablog::Client.create do |blog|
-  # 最新 7 件のエントリの内容を出力する
-  # blog.entries.each do |entry|
-    # puts entry.content
-  # end
-
-  # 新しいエントリを投稿する
-  posted_entry = blog.post_entry(title,
+    posted_entry = blog.post_entry(title,
                                 body,
                                 category)
-
-  # 既存エントリを更新する
-  # updated_entry = blog.update_entry(posted_entry.id,
-                                    # 'Revised Entry Title',
-                                    # posted_entry.content,
-                                    # posted_entry.categories)
-
-  # 既存エントリを削除する
-  # blog.delete_entry(updated_entry.id)
 end
