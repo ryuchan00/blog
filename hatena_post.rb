@@ -35,12 +35,10 @@ File.open(inputFile) do |file|
   body = file.read
 end
 
-p category
-exit
-
 # デフォルトでは 'conf.yml' から OAuth 設定を読み込む
 Hatenablog::Client.create do |blog|
     posted_entry = blog.post_entry(title,
                                 body,
                                 category)
 end
+p "[title]" + title.to_s + "は投稿されました。"
