@@ -17,9 +17,9 @@ $ git config --global user.email johndoe@example.com
 
 ```
 heroku buildpacs
-1\. https://github.com/heroku/heroku-buildpack-apt
-2\. https://github.com/rcaught/heroku-buildpack-cmake
-3\. heroku/ruby
+1. https://github.com/heroku/heroku-buildpack-apt
+2. https://github.com/rcaught/heroku-buildpack-cmake
+3. heroku/ruby
 ```
 
 ## buildpacをセットする
@@ -44,3 +44,5 @@ heroku buildpacks:add --index 1 heroku/nodejs # indexオプションは、buildp
 ```
 heroku buildpacks:clear
 ```
+
+https://codon-buildpacks.s3.amazonaws.com/buildpacks/frederick/heroku-buildpack-ruby.tgz

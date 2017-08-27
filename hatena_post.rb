@@ -29,6 +29,7 @@ end
 File.open(inputFile) do |file|
   if title.empty? && category.empty?
     title = file.gets
+    file.gets
     category = file.gets.split(",")
     category.map! {|item| item.strip}
   end
