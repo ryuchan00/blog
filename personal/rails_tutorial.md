@@ -1,5 +1,6 @@
 # 返信機能
-- [ ] microposts modelにscope追加
-- [ ] user nameを一意にする
+- [X] microposts にリファレンス追加(column nameがin_reply_toなのに注意)
+- [x] user nameを一意にする
+- [x] microposts controllerにDB処理追加
+- [x] microposts modelにscope追加
 - [ ] テスト追加
-- [ ] post時のDB処理
